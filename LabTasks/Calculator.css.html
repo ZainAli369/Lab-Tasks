@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f4f4f5;
+    }
+
+    .calculator {
+      background: #fcfcfc;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      width: 280px;
+    }
+
+    .display {
+      width: 100%;
+      height: 60px;
+      background: #fafafa;
+      border: 1px solid #e4e4e7;
+      border-radius: 8px;
+      text-align: right;
+      font-size: 28px;
+      padding: 10px 14px;
+      color: #18181b;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      height: 48px;
+      border: none;
+      border-radius: 8px;
+      background: #f4f4f5;
+      color: #18181b;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    button:hover {
+      background: #e4e4e7;
+    }
+
+    button.op {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    button.op:hover {
+      background: #c7d2fe;
+    }
+
+    button.equal {
+      background: #18181b;
+      color: #ffffff;
+      grid-column: span 2;
+    }
+
+    button.equal:hover {
+      background: #27272a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="text" class="display" placeholder="0" readonly> // This is the display area of the calculator where the input and results will be shown.
+    
+    <div class="keypad"> 
+      <button>C</button> 
+      <button>±</button>
+      <button>%</button>
+      <button class="op">÷</button>
+
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="op">×</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="op">−</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="op">+</button>
+
+      <button>0</button>
+      <button>.</button>
+      <button class="equal">=</button>
+    </div>
+  </div>
+
+</body>
+</html>
