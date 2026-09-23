@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Body */
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        /* Header and Logo */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 5%;
+            background-color: transparent;
+            filter: drop-shadow(10px);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #b74b4b;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* Desktop Navigation */
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #b74b4b;
+            border-bottom: 2px solid #b74b4b;
+        }
+
+        /* Mobile-specific layout */
+        @media (max-width: 768px) {
+            /* Change logo size */
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            /* Hide the horizontal nav links */
+            nav ul {
+                display: none;
+            }
+
+            /* Create a mobile-friendly hamburger menu */
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+            }
+
+            .hamburger span {
+                width: 30px;
+                height: 4px;
+                background-color: #b74b4b;
+                border-radius: 5px;
+            }
+
+            /* Show mobile navbar when hamburger menu is clicked */
+            nav.mobile-active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: black;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            nav.mobile-active ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            nav.mobile-active li {
+                margin: 1rem 0;
+            }
+
+            nav.mobile-active a {
+                font-size: 1.8rem;
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                transition: 0.3s ease;
+            }
+
+            nav.mobile-active a:hover {
+                color: #b74b4b;
+                border-bottom: 2px solid #b74b4b;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Logo -->
+        <div class="logo">My Portfolio</div>
+
+        <!-- Desktop Navigation (Visible on larger screens) -->
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div class="hamburger" id="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="mobile-nav" id="mobile-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        // Get the hamburger icon and mobile nav
+        const hamburger = document.getElementById('hamburger-icon');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        // Toggle the mobile nav on hamburger click
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('mobile-active');
+        });
+    </script>
+
+</body>
+</html>

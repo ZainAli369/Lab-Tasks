@@ -1,0 +1,114 @@
+/* Default styles for Desktop */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background-color: black;
+    color: white;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 5%;
+    background-color: transparent;
+    filter: drop-shadow(10px);
+  }
+  
+  .logo {
+    font-size: 2rem;
+    color: #b74b4b;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style-type: none;
+  }
+  
+  nav li {
+    margin-left: 2rem;
+  }
+  
+  nav a {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #b74b4b;
+    border-bottom: 2px solid #b74b4b;
+  }
+  
+  /* Mobile-specific layout */
+  @media (max-width: 768px) {
+    /* Change logo size */
+    .logo {
+      font-size: 1.6rem;
+    }
+  
+    /* Hide the horizontal nav links */
+    nav ul {
+      display: none;
+    }
+  
+    /* Create a mobile-friendly hamburger menu */
+    .hamburger {
+      display: block;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+  
+    .hamburger span {
+      width: 30px;
+      height: 4px;
+      background-color: #b74b4b;
+    }
+  
+    /* Show mobile navbar when hamburger menu is clicked */
+    nav.mobile-active {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  
+    nav.mobile-active ul {
+      list-style-type: none;
+      padding: 0;
+    }
+  
+    nav.mobile-active li {
+      margin: 1rem 0;
+    }
+  
+    nav.mobile-active a {
+      font-size: 1.8rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+  
+    nav.mobile-active a:hover {
+      color: #b74b4b;
+      border-bottom: 2px solid #b74b4b;
+    }
+  }
+  

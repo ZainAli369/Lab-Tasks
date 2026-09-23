@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEEE Conference Paper Template</title>
+<style>
+  @page { size: Letter; margin: 0.7in 0.65in; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: #e8e8e8;
+    color: #000;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10pt;
+    line-height: 1.05;
+  }
+
+  .paper {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 24px auto;
+    padding: 0.7in 0.65in;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(0,0,0,.18);
+  }
+
+  .title {
+    text-align: center;
+    font-size: 24pt;
+    font-weight: bold;
+    line-height: 1.05;
+    margin: 0 0 7px;
+  }
+
+  .note {
+    text-align: center;
+    font-size: 8pt;
+    margin: 0 0 15px;
+  }
+
+  .authors {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .authors.two {
+    grid-template-columns: repeat(2, 1fr);
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .author {
+    line-height: 1.05;
+  }
+
+  .author .name { font-weight: normal; }
+  .author .dept { font-style: italic; }
+
+  .front-matter {
+    column-count: 1;
+    margin-bottom: 8px;
+  }
+
+  .abstract, .keywords {
+    text-align: justify;
+    margin-bottom: 8px;
+  }
+
+  .label { font-weight: bold; }
+  .abstract .label { font-style: italic; }
+
+  /* Main paper: IEEE-style two columns */
+  .main {
+    column-count: 2;
+    column-gap: 0.25in;
+    text-align: justify;
+    column-fill: balance;
+  }
+
+  h1 {
+    break-after: avoid;
+    font-size: 10pt;
+    text-align: center;
+    font-weight: bold;
+    margin: 11px 0 5px;
+  }
+
+  h2 {
+    break-after: avoid;
+    font-size: 10pt;
+    text-align: left;
+    font-weight: bold;
+    font-style: normal;
+    margin: 8px 0 3px;
+  }
+
+  h3 {
+    break-after: avoid;
+    font-size: 10pt;
+    text-align: left;
+    font-weight: bold;
+    margin: 7px 0 3px;
+  }
+
+  p {
+    margin: 0 0 5px;
+    text-indent: 0;
+  }
+
+  ul {
+    margin: 3px 0 6px 17px;
+    padding: 0;
+  }
+
+  li {
+    margin: 0 0 3px;
+  }
+
+  .table-wrap {
+    break-inside: avoid;
+    margin: 7px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8pt;
+    text-align: center;
+  }
+
+  th, td {
+    border: 1px solid #000;
+    padding: 3px 4px;
+  }
+
+  .table-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3px;
+  }
+
+  .figure {
+    break-inside: avoid;
+    text-align: center;
+    margin: 8px 0;
+    border: 1px solid #777;
+    padding: 25px 10px;
+  }
+
+  .caption {
+    font-size: 8pt;
+    text-align: center;
+    margin-top: 3px;
+  }
+
+  .equation {
+    break-inside: avoid;
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .eq-number {
+    float: right;
+  }
+
+  .ack, .references {
+    break-inside: avoid;
+  }
+
+  .references p {
+    margin-bottom: 5px;
+    text-indent: 0;
+  }
+
+  .footer-note {
+    font-size: 8pt;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .paper {
+      width: auto;
+      min-height: auto;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .paper {
+      width: 100%;
+      min-height: auto;
+      margin: 0;
+      padding: 35px 28px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .main { column-count: 1; }
+    .authors { grid-template-columns: repeat(2, 1fr); }
+    .authors.two { width: 100%; }
+  }
+</style>
+</head>
+
+<body>
+<main class="paper">
+
+  <h1 class="title">Paper Title*</h1>
+  <p class="note"><em>Note: Sub-titles are not captured in Xplore and should not be used</em></p>
+
+  <section class="authors">
+    <div class="author">
+      <div class="name">1<sup>st</sup> Given Name Surname</div>
+      <div class="dept">dept. name of organization (of Affiliation)</div>
+      <div>name of organization (of Affiliation)</div>
+      <div>City, Country</div>
+      <div>email address or ORCID</div>
+    </div>
+    <div class="author">
+      <div class="name">2<sup>nd</sup> Given Name Surname</div>
+      <div class="dept">dept. name of organization (of Affiliation)</div>
+      <div>name of organization (of Affiliation)</div>
+      <div>City, Country</div>
+      <div>email address or ORCID</div>
+    </div>
+    <div class="author">
+      <div class="name">3<sup>rd</sup> Given Name Surname</div>
+      <div class="dept">dept. name of organization (of Affiliation)</div>
+      <div>name of organization (of Affiliation)</div>
+      <div>City, Country</div>
+      <div>email address or ORCID</div>
+    </div>
+    <div class="author">
+      <div class="name">4<sup>th</sup> Given Name Surname</div>
+      <div class="dept">dept. name of organization (of Affiliation)</div>
+      <div>name of organization (of Affiliation)</div>
+      <div>City, Country</div>
+      <div>email address or ORCID</div>
+    </div>
+  </section>
+
+  <section class="authors two">
+    <div class="author">
+      <div class="name">5<sup>th</sup> Given Name Surname</div>
+      <div class="dept">dept. name of organization (of Affiliation)</div>
+      <div>name of organization (of Affiliation)</div>
+      <div>City, Country</div>
+      <div>email address or ORCID</div>
+    </div>
+    <div class="author">
+      <div class="name">6<sup>th</sup> Given Name Surname</div>
+      <div class="dept">dept. name of organization (of Affiliation)</div>
+      <div>name of organization (of Affiliation)</div>
+      <div>City, Country</div>
+      <div>email address or ORCID</div>
+    </div>
+  </section>
+
+  <section class="front-matter">
+    <p class="abstract"><span class="label">Abstract</span>—This electronic document is a "live" template and already defines the components of your paper [title, text, heads, etc.] in its style sheet. <strong>*CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, or Math in Paper Title or Abstract.</strong> (Abstract)</p>
+    <p class="keywords"><span class="label">Keywords</span>—component, formatting, style, styling, insert (key words)</p>
+  </section>
+
+  <section class="main">
+
+    <h1>I. INTRODUCTION</h1>
+    <p>This template, modified in MS Word 2007 and saved as a "Word 97-2003 Document" for the PC, provides authors with most of the formatting specifications needed for preparing electronic versions of their papers. All standard paper components have been specified for three reasons: (1) ease of use when formatting individual papers, (2) automatic compliance to electronic requirements that facilitate the concurrent or later production of electronic products, and (3) conformity of style throughout a conference proceedings.</p>
+
+    <p>Margins, column widths, line spacing, and type styles are built-in; examples of the type styles are provided throughout this document and are identified in italic type, within parentheses, following the example. Some components, such as multi-leveled equations, graphics, and tables are not prescribed, although the various table text styles are provided.</p>
+
+    <p>The formatter will need to create these components, incorporating the applicable criteria that follow.</p>
+
+    <h1>II. EASE OF USE</h1>
+
+    <h2>A. Selecting a Template</h2>
+    <p>First, confirm that you have the correct template for your paper size. This template has been tailored for output on the US-letter paper size. If you are using A4-sized paper, please close this file and download the file "MSW_A4_format".</p>
+
+    <h2>B. Maintaining the Integrity of the Specifications</h2>
+    <p>The template is used to format your paper and style the text. All margins, column widths, line spaces, and text fonts are prescribed; please do not alter them. You may note peculiarities. For example, the head margin in this template measures proportionately more than is customary. This measurement and others are deliberate, using specifications that anticipate your paper as one part of the entire proceedings, and not as an independent document. Please do not revise any of the current designations.</p>
+
+    <h1>III. PREPARE YOUR PAPER BEFORE STYLING</h1>
+    <p>Before you begin to format your paper, first write and save the content as a separate text file. Complete all content and organizational editing before formatting. Please note sections A-D below for more information on proofreading, spelling and grammar.</p>
+
+    <p>Keep your text and graphic files separate until after the text has been formatted and styled. Do not use hard tabs, and limit use of hard returns to only one return at the end of a paragraph. Do not add any kind of pagination anywhere in the paper. Do not number text heads—the template will do that for you.</p>
+
+    <h2>A. Abbreviations and Acronyms</h2>
+    <p>Define abbreviations and acronyms the first time they are used in the text, even after they have been defined in the abstract. Abbreviations such as IEEE, SI, MKS, CGS, sc, dc, and rms do not have to be defined. Do not use abbreviations in the title or heads unless they are unavoidable.</p>
+
+    <h2>B. Units</h2>
+    <ul>
+      <li>Use either SI (MKS) or CGS as primary units. (SI units are encouraged.) English units may be used as secondary units (in parentheses). An exception would be the use of English units as identifiers in trade, such as "3.5-inch disk drive".</li>
+      <li>Avoid combining SI and CGS units, such as current in amperes and magnetic field in oersteds. This often leads to confusion because equations do not balance dimensionally. If you must use mixed units, clearly state the units for each quantity that you use in an equation.</li>
+      <li>Do not mix complete spellings and abbreviations of units: "Wb/m<sup>2</sup>" or "webers per square meter", not "webers/m<sup>2</sup>". Spell out units when they appear in text: "...a few henries", not "...a few H".</li>
+      <li>Use a zero before decimal points: "0.25", not "25". Use "cm<sup>3</sup>", not "cc".</li>
+    </ul>
+
+    <h2>C. Equations</h2>
+    <p>The equations are an exception to the prescribed specifications of this template. You will need to determine whether or not your equation should be typed using either the Times New Roman or the Symbol font (please no other font). To create multileveled equations, it may be necessary to treat the equation as a graphic and insert it into the text after your paper is styled.</p>
+
+    <p>Number equations consecutively. Equation numbers, within parentheses, are to be positioned flush right, as in (1), using a right tab stop. To make your equations more compact, you may use the solidus (/), the exp function, or appropriate exponents.</p>
+
+    <div class="equation">x = y + z <span class="eq-number">(1)</span></div>
+
+    <p>Italicize Roman symbols for quantities and variables, but not Greek symbols. Use a long dash rather than a hyphen for a minus sign. Punctuate equations with commas or periods when they are part of a sentence.</p>
+
+    <h2>D. Some Common Mistakes</h2>
+    <ul>
+      <li>The word "data" is plural, not singular.</li>
+      <li>The subscript for the permeability of vacuum μ<sub>0</sub> and other common scientific constants, is zero with subscript formatting, not a lowercase letter "o".</li>
+      <li>In American English, commas, semicolons, periods, question and exclamation marks are located within quotation marks only when a complete thought or name is cited.</li>
+      <li>A graph within a graph is an "inset", not an "insert". The word alternatively is preferred to the word "alternately" unless you mean something that alternates.</li>
+      <li>Do not use the word "essentially" to mean "approximately" or "effectively".</li>
+      <li>Be aware of the different meanings of the homophones "affect" and "effect", "complement" and "compliment", "discreet" and "discrete", "principal" and "principle".</li>
+      <li>Do not confuse "imply" and "infer".</li>
+      <li>The prefix "non" is not a word; it should be joined to the word it modifies, usually without a hyphen.</li>
+      <li>There is no period after the "et" in the Latin abbreviation "et al.".</li>
+      <li>The abbreviation "i.e." means "that is", and the abbreviation "e.g." means "for example".</li>
+      <li>An excellent style manual for science writers is [7].</li>
+    </ul>
+
+    <h1>IV. USING THE TEMPLATE</h1>
+    <p>After the text edit has been completed, the paper is ready for the template. Duplicate the template file by using the Save As command, and use the naming convention prescribed by your conference for the name of your paper. In this newly created file, highlight all of the contents and import your prepared text file. You are now ready to style your paper.</p>
+
+    <h2>A. Authors and Affiliations</h2>
+    <p>The template is designed for, but not limited to, six authors. A minimum of one author is required for all conference articles. Author names should be listed starting from left to right and then moving down to the next line. This is the author sequence that will be used in future citations and by indexing services.</p>
+
+    <p>Names should not be listed in columns nor grouped by affiliation. Please keep your affiliations as succinct as possible.</p>
+
+    <p><strong>1)</strong> <strong>For papers with more than six authors:</strong> Add author names horizontally, moving to a third row if needed for more than 8 authors.</p>
+    <p><strong>2)</strong> <strong>For papers with less than six authors:</strong> To change the default, adjust the template as follows.</p>
+    <p>&nbsp;&nbsp;&nbsp;<strong>a)</strong> <strong>Selection:</strong> Highlight all author and affiliation lines.</p>
+    <p>&nbsp;&nbsp;&nbsp;<strong>b)</strong> <strong>Change number of columns:</strong> Select the Columns icon from the MS Word Standard toolbar and then select the correct number of columns.</p>
+    <p>&nbsp;&nbsp;&nbsp;<strong>c)</strong> <strong>Deletion:</strong> Delete the author and affiliation lines for the extra authors.</p>
+
+    <h2>B. Identify the Headings</h2>
+    <p>Headings, or heads, are organizational devices that guide the reader through your paper. There are two types: component heads and text heads.</p>
+
+    <p>Component heads identify the different components of your paper and are not topically subordinate to each other. Examples include Acknowledgments and References. Use "figure caption" for figure captions, and "table head" for table titles.</p>
+
+    <p>Text heads organize the topics on a relational, hierarchical basis. For example, the paper title is the primary text head because all subsequent material relates and elaborates on this one topic. Styles named "Heading 1", "Heading 2", "Heading 3", and "Heading 4" are prescribed.</p>
+
+    <h2>C. Figures and Tables</h2>
+    <p><strong>a) Positioning Figures and Tables:</strong> Place figures and tables at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text. Use the abbreviation "Fig. 1", even at the beginning of a sentence.</p>
+
+    <div class="table-wrap">
+      <div class="table-title">TABLE I. TABLE TYPE STYLES</div>
+      <table>
+        <tr>
+          <th>Table Head</th>
+          <th>Table Column Head</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td></td>
+          <td><em>Table column subhead</em></td>
+          <td><em>Subhead</em></td>
+          <td><em>Subhead</em></td>
+        </tr>
+        <tr>
+          <td>copy</td>
+          <td>More table copy<sup>a</sup></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="caption"><sup>a</sup> Sample of a table footnote.</div>
+    </div>
+
+    <div class="figure">
+      Figure placeholder
+    </div>
+    <div class="caption"><strong>Fig. 1.</strong> Example of a figure caption.</div>
+
+    <p><strong>Figure Labels:</strong> Use 8 point Times New Roman for Figure labels. Use words rather than symbols or abbreviations when writing Figure axis labels to avoid confusing the reader. If including units in the label, present them within parentheses. Do not label axes only with units.</p>
+
+    <h1>ACKNOWLEDGMENT</h1>
+    <p>The preferred spelling of the word "acknowledgment" in America is without an "e" after the "g". Avoid the stilted expression "one of us (R. B. G.) thanks ...". Instead, try "R. B. G. thanks...". Put sponsor acknowledgments in the unnumbered footnote on the first page.</p>
+
+    <h1>REFERENCES</h1>
+    <div class="references">
+      <p>[1] G. Eason, B. Noble, and I. N. Sneddon, "On certain integrals of Lipschitz-Hankel type involving products of Bessel functions," <em>Phil. Trans. Roy. Soc. London</em>, vol. A247, pp. 529-551, April 1955.</p>
+      <p>[2] J. Clerk Maxwell, <em>A Treatise on Electricity and Magnetism</em>, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp. 68-73.</p>
+      <p>[3] I. S. Jacobs and C. P. Bean, "Fine particles, thin films and exchange anisotropy," in <em>Magnetism</em>, vol. III, G. T. Rado and G. T. Suhl, Eds. New York: Academic, 1963, pp. 271-350.</p>
+      <p>[4] K. Elissa, "Title of paper if known," unpublished.</p>
+      <p>[5] R. Nicole, "Title of paper with only first word capitalized," <em>J. Name Stand. Abbrev.</em>, in press.</p>
+      <p>[6] Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, "Electron spectroscopy studies on magneto-optical media and plastic substrate interface," <em>IEEE Transl. J. Magn. Japan</em>, vol. 2, pp. 740-741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].</p>
+      <p>[7] M. Young, <em>The Technical Writer's Handbook</em>. Mill Valley, CA: University Science, 1989.</p>
+      <p>[8] K. Eves and J. Valasek, "Adaptive control for singularly perturbed systems examples," Code Ocean, Aug. 2023. [Online]. Available: https://codeocean.com/capsule/4989235/tree</p>
+      <p>[9] D. P. Kingma and M. Welling, "Auto-encoding variational Bayes," 2013, arXiv:1312.6114. [Online]. Available: https://arxiv.org/abs/1312.6114</p>
+      <p>[10] S. Liu, "Wi-Fi Energy Detection Testbed (12MTC)," 2023, github repository. [Online]. Available: https://github.com/liustone99/Wi-Fi-Energy-Detection-Testbed-12MTC</p>
+      <p>[11] "Treatment episode data set: discharges (TEDS-D): concatenated, 2006 to 2009." U.S. Department of Health and Human Services, Substance Abuse and Mental Health Services Administration, Office of Applied Studies, August, 2013, DOI:10.3886/ICPSR30122.v2</p>
+    </div>
+
+  </section>
+
+  <p class="footer-note"><em>IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference.</em></p>
+
+</main>
+</body>
+</html>

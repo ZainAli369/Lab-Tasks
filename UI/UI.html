@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The State of Software Delivery in Healthcare | Original Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+:root{--bg:#070b14;--bg2:#0d1424;--fg:#eef3ff;--mut:#9aa7c4;--g:#3dffa2;--g2:#12c7b0;--v:#7a5cff;--pk:#ff5c9a;--line:rgba(255,255,255,.1);--card:rgba(255,255,255,.05);
+--head:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font:400 1.05rem/1.6 var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2}
+.aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60vw 50vh at 15% 10%,rgba(122,92,255,.28),transparent 60%),radial-gradient(50vw 50vh at 85% 30%,rgba(61,255,162,.16),transparent 60%),radial-gradient(60vw 60vh at 50% 100%,rgba(255,92,154,.14),transparent 60%);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(0,-3vh,0) scale(1.08)}}
+.glow{position:fixed;width:420px;height:420px;border-radius:50%;left:0;top:0;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(61,255,162,.16),transparent 65%);transform:translate(-50%,-50%);transition:opacity .3s}
+.bar-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:50;background:linear-gradient(90deg,var(--g),var(--v),var(--pk));box-shadow:0 0 12px var(--g)}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.03em;line-height:1.05}
+.grad{background:linear-gradient(100deg,#fff 10%,var(--g) 50%,var(--v) 95%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;padding:6rem 0 4rem}
+.year{display:inline-flex;align-items:center;gap:.6rem;padding:.45rem 1rem;border:1px solid var(--line);border-radius:99px;background:var(--card);backdrop-filter:blur(10px);font:500 .9rem var(--head);letter-spacing:.2em;color:var(--g)}
+.year i{width:8px;height:8px;border-radius:50%;background:var(--g);box-shadow:0 0 0 0 var(--g);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 12px transparent}}
+.hero h1{font-size:clamp(2.8rem,8.5vw,7rem);margin:1.6rem auto 1.4rem;max-width:14ch}
+.hero p{max-width:40rem;margin:0 auto;color:var(--mut);font-size:clamp(1.05rem,2vw,1.35rem)}
+.scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);width:26px;height:44px;border:2px solid var(--mut);border-radius:20px;opacity:.7}
+.scroll::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--g);animation:wheel 1.6s infinite}
+@keyframes wheel{to{transform:translateY(16px);opacity:0}}
+.orbit{position:absolute;width:min(90vw,760px);aspect-ratio:1;border-radius:50%;border:1px dashed rgba(255,255,255,.08);animation:spin 60s linear infinite;z-index:-1}
+.orbit::before{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--g);box-shadow:0 0 24px var(--g)}
+.orbit.o2{width:min(65vw,540px);animation-duration:40s;animation-direction:reverse}
+.orbit.o2::before{background:var(--pk);box-shadow:0 0 24px var(--pk)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* INTRO */
+.intro{padding:5rem 0;text-align:center}
+.intro h2{font-size:clamp(2rem,5vw,3.8rem);max-width:20ch;margin:0 auto 1.4rem}
+.intro p{max-width:42rem;margin:0 auto;color:var(--mut);font-size:1.2rem}
+
+/* SECTIONS */
+section.blk{padding:6rem 0;position:relative}
+section.blk+section.blk{border-top:1px solid var(--line)}
+.num{font:700 .85rem var(--head);letter-spacing:.25em;color:var(--g);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+.num::after{content:"";height:1px;width:60px;background:linear-gradient(90deg,var(--g),transparent)}
+.blk h2{font-size:clamp(2rem,5vw,3.6rem);max-width:18ch;margin-bottom:1.2rem}
+.lead{color:var(--mut);font-size:1.2rem;max-width:40rem;margin-bottom:3rem}
+.grid{display:grid;gap:1.4rem}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.card{position:relative;border:1px solid var(--line);border-radius:24px;padding:2rem;background:var(--card);backdrop-filter:blur(14px);overflow:hidden;transform-style:preserve-3d;transition:transform .25s,border-color .3s,box-shadow .3s}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,0%),rgba(61,255,162,.14),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(61,255,162,.45);box-shadow:0 20px 60px -20px rgba(61,255,162,.35)}
+.card:hover::before{opacity:1}
+.stat{font:700 clamp(3.4rem,8vw,6rem)/1 var(--head);letter-spacing:-.05em;background:linear-gradient(135deg,#fff,var(--g) 60%,var(--g2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat sup{font-size:.5em;vertical-align:top;position:relative;top:.15em}
+.card p{color:var(--mut);margin-top:.8rem}
+.reveal{opacity:0;transform:translateY(40px) scale(.98);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* CHARTS */
+.chart{margin-top:1.4rem}
+.chart h3{font:500 1rem var(--body);color:var(--mut);letter-spacing:0;margin-bottom:1.6rem}
+.row{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:1rem;align-items:center;margin-bottom:1.1rem}
+.row span{font-weight:500}
+.track{position:relative;height:38px;border-radius:12px;background:rgba(255,255,255,.05);overflow:hidden}
+.fill{height:100%;width:0;border-radius:12px;background:linear-gradient(90deg,var(--v),var(--g));display:flex;align-items:center;justify-content:flex-end;padding-right:.8rem;font:700 .95rem var(--head);color:#04140c;transition:width 1.6s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.fill::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:sweep 3s 1.8s infinite}
+@keyframes sweep{to{transform:translateX(100%)}}
+.fill.b{background:linear-gradient(90deg,#52506b,#8a86b8);color:#fff;margin-top:6px}
+.fill.a{margin:0}
+.legend{display:flex;gap:1.4rem;margin-bottom:1.4rem;color:var(--mut);font-size:.9rem}
+.legend b{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:.4rem;vertical-align:-1px;background:linear-gradient(90deg,var(--v),var(--g))}
+.legend b.m{background:#8a86b8}
+.dual .track{height:auto;background:none}
+.dual .fill{height:30px}
+
+/* RING */
+.ringwrap{display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.ring{--p:0;width:min(260px,70vw);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--g) calc(var(--p)*1%),rgba(255,255,255,.08) 0);position:relative;transition:--p 2s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 80px rgba(61,255,162,.25)}
+.ring::before{content:"";position:absolute;inset:16px;border-radius:50%;background:var(--bg2)}
+.ring .stat{position:relative;font-size:4.4rem}
+.ringtxt{flex:1;min-width:240px;font:500 clamp(1.4rem,3vw,2rem)/1.3 var(--head);letter-spacing:-.02em}
+
+/* LINK CARDS & VISUALS */
+.link{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center;margin-top:1.4rem}
+@media(max-width:760px){.link{grid-template-columns:1fr}}
+.link a.t{font:500 clamp(1.3rem,2.6vw,1.8rem)/1.25 var(--head);text-decoration:none;letter-spacing:-.02em;display:inline;background:linear-gradient(var(--g),var(--g)) 0 100%/0 2px no-repeat;transition:background-size .4s}
+.link a.t:hover{background-size:100% 2px}
+.link a.t::after{content:" →";color:var(--g)}
+.vis{height:240px;border-radius:18px;position:relative;overflow:hidden;border:1px solid var(--line);display:grid;place-items:center}
+.v-phones{background:radial-gradient(circle at 30% 20%,#2a1f5c,#0b1030)}
+.ph{position:absolute;width:104px;height:200px;border-radius:20px;border:3px solid #cfd8ff33;background:linear-gradient(160deg,#1a2350,#0a1030);padding:10px;animation:float 5s ease-in-out infinite}
+.ph:nth-child(1){transform:translateX(-90px) rotate(-8deg);animation-delay:-1s}
+.ph:nth-child(2){z-index:2;height:216px;border-color:var(--g);box-shadow:0 0 30px rgba(61,255,162,.3)}
+.ph:nth-child(3){transform:translateX(90px) rotate(8deg);animation-delay:-2.5s}
+@keyframes float{50%{margin-top:-10px}}
+.ph i{display:block;height:8px;border-radius:4px;background:#ffffff33;margin-bottom:8px}
+.ph i:first-child{width:50%;background:var(--g)}
+.ph .face{height:70px;border-radius:12px;background:linear-gradient(135deg,var(--pk),var(--v));margin:8px 0}
+.ph .btn{height:22px;border-radius:99px;background:var(--g);margin-top:12px}
+.v-chat{background:linear-gradient(160deg,#10203d,#0a1024);align-content:center;padding:1.2rem;gap:.6rem;display:grid;justify-items:start}
+.msg{padding:.6rem .9rem;border-radius:16px 16px 16px 4px;background:#ffffff14;font-size:.85rem;max-width:80%;animation:pop 4s infinite backwards}
+.msg.me{justify-self:end;background:var(--v);border-radius:16px 16px 4px 16px;animation-delay:.6s}
+.msg.rec{background:linear-gradient(135deg,var(--g),var(--g2));color:#04140c;font-weight:600;animation-delay:1.4s}
+@keyframes pop{0%{opacity:0;transform:translateY(10px) scale(.9)}15%,90%{opacity:1;transform:none}100%{opacity:0}}
+.v-health{background:radial-gradient(circle at 70% 30%,#0f3b3a,#07141f)}
+.iso{width:110px;height:190px;border-radius:22px;background:linear-gradient(160deg,#fff,#c9d6ff);transform:rotateX(55deg) rotateZ(-35deg);box-shadow:-30px 30px 40px #0008;display:grid;place-items:center;color:var(--pk);position:relative}
+.iso svg{width:64px;transform:rotate(0)}
+.iso::after{content:"+";position:absolute;right:-14px;top:-14px;width:34px;height:34px;border-radius:50%;background:var(--pk);color:#fff;font:700 1.4rem/34px var(--head);text-align:center}
+.v-team{background:radial-gradient(circle at 50% 100%,#3d2a12,#100b17)}
+.people{display:flex;gap:-10px}
+.people b{width:54px;height:54px;border-radius:50%;margin-left:-10px;border:3px solid #100b17;background:linear-gradient(135deg,var(--c1),var(--c2));animation:float 4s ease-in-out infinite}
+.v-chart{background:linear-gradient(160deg,#0a2a1e,#06110f);display:flex;align-items:flex-end;gap:10px;padding:0 2rem 2rem;place-items:end}
+.v-chart i{flex:1;background:linear-gradient(var(--g),transparent);border-radius:6px 6px 0 0;height:var(--h);animation:grow 3s ease-in-out infinite alternate}
+@keyframes grow{from{transform:scaleY(.6);transform-origin:bottom}}
+
+/* ASSESSMENT CTA */
+.assess{margin-top:2rem;border:1px solid transparent;border-radius:24px;padding:2rem;background:linear-gradient(var(--bg2),var(--bg2)) padding-box,conic-gradient(from var(--a,0deg),var(--v),var(--g),var(--pk),var(--v)) border-box;animation:rot 6s linear infinite;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes rot{to{--a:360deg}}
+@media(max-width:760px){.assess{grid-template-columns:1fr}}
+.assess a.t{font:700 clamp(1.4rem,3vw,2rem)/1.15 var(--head);text-decoration:none;letter-spacing:-.02em}
+.assess a.t:hover{color:var(--g)}
+.personas{display:flex;justify-content:center;height:150px;align-items:center;perspective:600px}
+.pc{width:96px;height:130px;border-radius:14px;padding:10px;font:600 .68rem var(--head);color:#fff;background:linear-gradient(160deg,var(--c1),var(--c2));margin-left:-28px;box-shadow:0 10px 30px #0008;transition:transform .4s;display:flex;align-items:flex-end;text-align:left}
+.assess:hover .pc:nth-child(1){transform:rotate(-10deg) translateY(-8px)}
+.assess:hover .pc:nth-child(2){transform:translateY(-16px) scale(1.08);z-index:2}
+.assess:hover .pc:nth-child(3){transform:rotate(10deg) translateY(-8px)}
+.pc:nth-child(2){z-index:1}
+
+/* SO WHAT */
+.so{padding:6rem 0}
+.so h2{font-size:clamp(2rem,5vw,3.6rem);max-width:16ch;margin-bottom:1.2rem}
+.so h3{font-size:1.5rem;margin:1.4rem 0 .5rem}
+.so .card{padding:0;display:flex;flex-direction:column}
+.so .card>div:first-child{padding:1.6rem 1.6rem 0}
+.so .vis{height:160px;border:0;border-radius:0;margin-top:1.4rem}
+.so .card a{display:block;padding:1.2rem 1.6rem 1.6rem;color:var(--g);text-decoration:none;font-weight:600;position:relative}
+.so .card a:hover{text-decoration:underline}
+
+/* CTA */
+.cta{text-align:center;padding:7rem 0;position:relative}
+.cta h2{font-size:clamp(2.2rem,6vw,4.6rem);max-width:18ch;margin:0 auto 1.4rem}
+.cta p{max-width:40rem;margin:0 auto 2.4rem;color:var(--mut);font-size:1.2rem}
+.btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{position:relative;display:inline-block;padding:1.05rem 2rem;border-radius:99px;font:600 1rem var(--head);text-decoration:none;transition:transform .25s,box-shadow .3s;overflow:hidden}
+.btn.p{background:linear-gradient(120deg,var(--g),var(--g2));color:#03160d;box-shadow:0 10px 40px -8px rgba(61,255,162,.6)}
+.btn.p:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 16px 50px -6px rgba(61,255,162,.9)}
+.btn.s{border:1px solid var(--line);background:var(--card);backdrop-filter:blur(10px)}
+.btn.s:hover{border-color:var(--g);transform:translateY(-3px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:4rem 0 3rem;background:linear-gradient(transparent,rgba(0,0,0,.4))}
+.logo{font:700 1.8rem var(--head);letter-spacing:-.04em;text-decoration:none;display:inline-block;margin-bottom:2rem}
+.logo::after{content:".";color:var(--g)}
+footer .g2{gap:3rem}
+footer h2{font:700 1.2rem var(--head);margin-bottom:.8rem}
+footer p{color:var(--mut);font-size:.98rem}
+footer a{color:var(--g)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><div class="aurora"></div><div class="glow" id="glow"></div><div class="bar-progress" id="prog"></div>
+
+<header class="hero">
+  <div class="orbit"></div><div class="orbit o2"></div>
+  <div class="wrap">
+    <span class="year"><i></i>2026</span>
+    <h1 class="grad">The State of Healthcare Software Delivery</h1>
+    <p>A survey-based look at how US healthcare engineering, product, and technology leaders ship software.</p>
+  </div>
+  <div class="scroll"></div>
+</header>
+
+<div class="intro wrap reveal">
+  <h2>Speed and safety aren't a trade-off in healthcare.</h2>
+  <p>We asked technology leaders at American healthcare companies how top teams manage both at once. These are the patterns that emerged.</p>
+</div>
+
+<section class="blk"><div class="wrap">
+  <div class="num">01</div>
+  <h2 class="reveal">Delivery teams are being pushed to go faster.</h2>
+  <p class="lead reveal">Modernization, AI adoption, and quicker releases are all expected now, in one of software's most heavily regulated fields.</p>
+  <div class="grid g2">
+    <div class="card reveal"><div class="stat" data-n="68">0<sup>%</sup></div><p>find it hard to ship faster without adding operational risk</p></div>
+    <div class="card reveal"><div class="stat" data-n="58">0<sup>%</sup></div><p>lose more time to sign-offs than to building the product</p></div>
+  </div>
+  <div class="card chart reveal">
+    <h3>Biggest delivery blockers (% naming each)</h3>
+    <div class="row"><span>Compliance approvals</span><div class="track"><div class="fill" data-w="57">57%</div></div></div>
+    <div class="row"><span>Budget constraints</span><div class="track"><div class="fill" data-w="47">47%</div></div></div>
+    <div class="row"><span>Security reviews</span><div class="track"><div class="fill" data-w="46">46%</div></div></div>
+    <div class="row"><span>Vendor integration</span><div class="track"><div class="fill" data-w="42">42%</div></div></div>
+    <div class="row"><span>Legacy systems</span><div class="track"><div class="fill" data-w="38">38%</div></div></div>
+  </div>
+  <div class="card link reveal">
+    <a class="t" href="#">A case study on rebuilding foundations for 10x faster delivery.</a>
+    <div class="vis v-phones"><div class="ph"><i></i><div class="face"></div><i></i><i></i></div><div class="ph"><i></i><div class="face"></div><i></i><div class="btn"></div></div><div class="ph"><i></i><i></i><i></i><div class="btn"></div></div></div>
+  </div>
+  <div class="assess-slot"></div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="num">02</div>
+  <h2 class="reveal">Dependable beats fast.</h2>
+  <p class="lead reveal">Consistent, trustworthy releases now matter more than raw pace.</p>
+  <div class="card reveal ringwrap">
+    <div class="ring" data-p="94"><div class="stat" data-n="94">0<sup>%</sup></div></div>
+    <div class="ringtxt">of leaders prefer teams that deliver dependably to teams that are merely quick</div>
+  </div>
+  <div class="card link reveal">
+    <a class="t" href="#">Staying compliant while keeping momentum in regulated fields</a>
+    <div class="vis v-team"><div class="people"><b style="--c1:#ffb86b;--c2:#ff5c9a"></b><b style="--c1:#3dffa2;--c2:#12c7b0;animation-delay:-1s"></b><b style="--c1:#7a5cff;--c2:#5cc8ff;animation-delay:-2s"></b></div></div>
+  </div>
+  <div class="assess-slot"></div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="num">03</div>
+  <h2 class="reveal">Innovation hasn't slowed. It has become more deliberate.</h2>
+  <p class="lead reveal">Phased rollouts, isolated test environments, and process rigor are becoming the standard route to launching AI safely.</p>
+  <div class="grid g3">
+    <div class="card reveal"><div class="stat" data-n="90">0<sup>%</sup></div><p>report innovation plans leaning toward operational rigor</p></div>
+    <div class="card reveal"><div class="stat" data-n="89">0<sup>%</sup></div><p>believe wins depend on a structured rollout</p></div>
+    <div class="card reveal"><div class="stat" data-n="85">0<sup>%</sup></div><p>see secure sandboxes turning into the norm</p></div>
+  </div>
+  <div class="card link reveal">
+    <a class="t" href="#">Picking and rolling out an LLM in a healthcare product</a>
+    <div class="vis v-chat"><div class="msg">Something to help me sleep?</div><div class="msg me">Any supplements you'd suggest?</div><div class="msg rec">★ Recommended for you</div></div>
+  </div>
+  <div class="assess-slot"></div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="num">04</div>
+  <h2 class="reveal">Often, confidence is what holds teams back.</h2>
+  <p class="lead reveal">The tech is usually ready. What's missing is someone willing to make the call.</p>
+  <div class="grid g2">
+    <div class="card reveal"><div class="stat" data-n="89">0<sup>%</sup></div><p>say faster delivery hinges on partners they trust</p></div>
+    <div class="card reveal"><div class="stat" data-n="67">0<sup>%</sup></div><p>adopt new tech more readily with a seasoned partner beside them</p></div>
+  </div>
+  <div class="card chart dual reveal">
+    <h3>How fast-growing teams cut risk and keep pace</h3>
+    <div class="legend"><span><b></b>High growth</span><span><b class="m"></b>Moderate growth</span></div>
+    <div class="row"><span>Structured prioritization</span><div class="track"><div class="fill a" data-w="85">85%</div><div class="fill b" data-w="39">39%</div></div></div>
+    <div class="row"><span>Experienced software partners</span><div class="track"><div class="fill a" data-w="71">71%</div><div class="fill b" data-w="59">59%</div></div></div>
+    <div class="row"><span>Cross-functional planning</span><div class="track"><div class="fill a" data-w="65">65%</div><div class="fill b" data-w="42">42%</div></div></div>
+  </div>
+  <div class="card link reveal">
+    <a class="t" href="#">How dependable partners speed up delivery</a>
+    <div class="vis v-health"><div class="iso"><svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22h14l6-16 10 30 8-20 4 6h18"/></svg></div></div>
+  </div>
+  <div class="assess-slot"></div>
+</div></section>
+
+<section class="so"><div class="wrap">
+  <div class="num">05</div>
+  <h2 class="reveal">What should your team take from this?</h2>
+  <p class="lead reveal">Teams that pair pace with dependability tend to invest in solid foundations, careful AI rollouts, and sharp product strategy. Three places to dig in next.</p>
+  <div class="grid g3">
+    <div class="card reveal"><div><h3>Strengthen your delivery base</h3><p>A solid base lets teams speed up without giving up dependability.</p></div><div class="vis v-chart"><i style="--h:35%"></i><i style="--h:60%"></i><i style="--h:45%"></i><i style="--h:80%"></i><i style="--h:65%"></i><i style="--h:95%"></i></div><a href="#">Unlocking dev speed in regulated fields →</a></div>
+    <div class="card reveal"><div><h3>Bring in AI with assurance</h3><p>Strong teams weigh security, governance, and hands-on execution from the start.</p></div><div class="vis v-chat"><div class="msg">Is this HIPAA safe?</div><div class="msg rec">Sandboxed &amp; audited ✓</div></div><a href="#">Picking and rolling out an LLM in a healthcare product →</a></div>
+    <div class="card reveal"><div><h3>Lower risk before building</h3><p>Sound product choices cut delivery risk before coding starts.</p></div><div class="vis v-team"><div class="people"><b style="--c1:#ff5c9a;--c2:#7a5cff"></b><b style="--c1:#3dffa2;--c2:#12c7b0;animation-delay:-1s"></b><b style="--c1:#ffb86b;--c2:#ff5c9a;animation-delay:-2s"></b><b style="--c1:#5cc8ff;--c2:#7a5cff;animation-delay:-3s"></b><b style="--c1:#fff;--c2:#9aa7c4;animation-delay:-.5s"></b></div></div><a href="#">How product strategy de-risks work before any code →</a></div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap reveal">
+  <h2 class="grad">See how your team stacks up</h2>
+  <p>Complete the delivery self-assessment to compare your approach with technology leaders nationwide.</p>
+  <div class="btns"><a class="btn p" href="#">Compare my team</a><a class="btn s" href="#">Start a project with us</a></div>
+</div></section>
+
+<footer><div class="wrap">
+  <a class="logo" href="#">Z</a>
+  <div class="grid g2">
+    <div><h2>About the research</h2><p>An independent firm surveyed 168 engineering, product, and technology leaders at US healthcare organizations about how they balance delivery, innovation, compliance, and risk under growing regulation.</p></div>
+    <div><h2>Methodology</h2><p>Margin of error: +/‑8% at a 95% confidence level.</p></div>
+  </div>
+  <p style="margin-top:2.5rem;font-size:.8rem;opacity:.6">
+
+<template id="assess"><div class="assess reveal"><a class="t" href="#">Where does your organization land?</a><div class="personas"><div class="pc" style="--c1:#7a5cff;--c2:#3b2a9c">Steady Scaler</div><div class="pc" style="--c1:#3dffa2;--c2:#0d7a63;color:#03160d">Reliable Builder</div><div class="pc" style="--c1:#ff5c9a;--c2:#8a2a5c">Bold Explorer</div></div></div></template>
+
+<script>
+(function(){
+var ass=document.getElementById('assess');
+document.querySelectorAll('.assess-slot').forEach(function(s){s.appendChild(ass.content.cloneNode(true))});
+
+/* constellation */
+var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,pts=[],m={x:-999,y:-999};
+function rs(){W=c.width=innerWidth;H=c.height=innerHeight;pts=[];var n=Math.min(110,Math.floor(W*H/14000));for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.6+.4})}
+rs();addEventListener('resize',rs);
+function draw(){x.clearRect(0,0,W,H);
+for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+x.fillStyle='rgba(180,255,220,.8)';x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill();
+for(var j=i+1;j<pts.length;j++){var q=pts[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){x.strokeStyle='rgba(61,255,162,'+(.18*(1-d/130))+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}
+var dm=Math.hypot(p.x-m.x,p.y-m.y);if(dm<170){x.strokeStyle='rgba(122,92,255,'+(.5*(1-dm/170))+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(m.x,m.y);x.stroke()}}
+requestAnimationFrame(draw)}
+draw();
+
+/* cursor glow + card spotlight + progress */
+var g=document.getElementById('glow'),pr=document.getElementById('prog');
+addEventListener('pointermove',function(e){m.x=e.clientX;m.y=e.clientY;g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+addEventListener('scroll',function(){pr.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+document.querySelectorAll('.card').forEach(function(cd){
+cd.addEventListener('pointermove',function(e){var r=cd.getBoundingClientRect(),px=e.clientX-r.left,py=e.clientY-r.top;cd.style.setProperty('--mx',px+'px');cd.style.setProperty('--my',py+'px');
+if(!cd.classList.contains('chart')){cd.style.transform='perspective(900px) rotateX('+((py/r.height-.5)*-5)+'deg) rotateY('+((px/r.width-.5)*5)+'deg)'}});
+cd.addEventListener('pointerleave',function(){cd.style.transform=''})});
+
+/* reveal, counters, bars, ring */
+function count(el){var n=+el.dataset.n,sup=el.querySelector('sup'),t0=performance.now();
+(function f(t){var k=Math.min(1,(t-t0)/1800),e=1-Math.pow(1-k,4);el.firstChild.nodeValue=Math.round(n*e);if(k<1)requestAnimationFrame(f)})(t0)}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var el=en.target;el.classList.add('in');
+el.querySelectorAll('.stat[data-n]').forEach(count);
+if(el.matches('.stat[data-n]'))count(el);
+el.querySelectorAll('.fill').forEach(function(f,i){setTimeout(function(){f.style.width=f.dataset.w+'%'},i*120)});
+el.querySelectorAll('.ring').forEach(function(r){r.style.setProperty('--p',r.dataset.p)});
+io.unobserve(el)})},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

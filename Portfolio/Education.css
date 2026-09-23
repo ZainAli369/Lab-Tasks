@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+html{
+    font-size: 63%;
+
+}
+
+ body{
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+
+}
+
+header{
+    margin-top: 20px;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1em 9%;
+    background-color: transparent;
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.logo{
+    font-size: 3rem;
+    color: #b74b4b;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.logo:hover{
+        transform:scale(1.1);
+}
+
+nav a{
+    font-size: 1.8rem;
+    color: white;
+    margin-left: 3rem;
+    font-weight: 800;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+nav a:hover, nav a:active{
+    color: #b74b4b;
+    border-bottom:2px #b74b4b solid;
+}
+@media (max-width:995px)
+{
+    nav{
+        position:absolute;
+        top:100%;
+        right:0;
+        width:40%;
+        border-left: 3px solid #b74b4b;
+        border-bottom: 3px solid #b74b4b;
+        border-bottom-left-radius: 2rem;
+        padding: 1rem solid;
+        background-color: black;
+        border-top: 0.1rem solid black;
+
+    
+    }
+    nav.active{
+        display: block;
+    }
+    nav a{
+        display: block;
+        font-weight: 2rem ;
+        margin: 3rem 0;
+
+    }
+    nav a:hover,nav a.active{
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem solid #b74b4b;
+    }
+
+
+}
+.education{
+    padding: 5rem 9%;
+    text-align: center;
+}
+
+.education h1{
+    font-size: 4rem;
+    margin-bottom: 5rem;
+}
+
+span{
+    color: #b74b4b;
+}
+
+.education-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.edu-box{
+    background: #111;
+    border: 1px solid #b74b4b;
+    padding: 2rem 5rem;
+    border-radius: 2rem;
+    width: 400px;
+    transition: 0.3s ease;
+}
+
+.edu-box:hover{
+    background: #b74b4b;
+    color: black;
+}
+@media (max-width :1000px)
+{
+    .home{
+        gap: 4rem;
+    }
+}
+
+@media (max-width :996px){
+
+    .home{
+        flex-direction: column;
+        margin: 5rem 4rem;
+    }
+    .home-content h3{
+        font-size: 3rem;
+    }
+    .home-content h1{
+        font-size: 5rem;
+    }
+    .home-img{
+        width:70vh;
+        margin-top: 4rem;
+    }
+}
